@@ -21,33 +21,3 @@ md2pdf document.md
 ```bash
 pip uninstall md2pdf
 ```
-
-## Build Distribution Package
-
-If you want to create a distributable package:
-
-```bash
-# Install build tools
-pip install build
-
-# Build the package
-python -m build
-
-# This creates dist/md2pdf-1.0.0.tar.gz and dist/md2pdf-1.0.0-py3-none-any.whl
-```
-
-## Install from Distribution
-
-```bash
-pip install dist/md2pdf-1.0.0-py3-none-any.whl
-```
-
-## Publish to PyPI (Optional)
-
-```bash
-# Install twine
-pip install twine
-
-# Upload to PyPI
-twine upload dist/*
-```

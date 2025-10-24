@@ -14,9 +14,9 @@ setup(
     description='Convert Markdown files to beautiful PDFs with emoji support',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    author='Your Name',
-    author_email='your.email@example.com',
-    url='https://github.com/yourusername/md2pdf',
+    author='Tanya Tree',
+    author_email='tanyatree.dev@gmail.com',
+    url='https://github.com/tanyatree/md2pdf',
     packages=find_packages(),
     py_modules=['md2pdf'],
     install_requires=[
