@@ -107,10 +107,8 @@ This is a **bold** statement and this is *italic*.
 
 ## Code Example
 
-```python
 def hello_world():
     print("Hello, World! 🌍")
-```
 
 ## Table
 
@@ -121,10 +119,9 @@ def hello_world():
 | Code    | ✅ Yes    |
 
 > This is a blockquote with important information! 💡
+```
 
-```markdown
-
-Convert it:
+Then convert it:
 
 ```bash
 md2pdf example.md
