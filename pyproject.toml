@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=45", "wheel", "setuptools_scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "md2pdf"
+version = "1.0.0"
+description = "Convert Markdown files to beautiful PDFs with emoji support"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [
+    {name = "Your Name", email = "your.email@example.com"}
+]
+keywords = ["markdown", "pdf", "converter", "cli", "emoji"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Topic :: Text Processing :: Markup",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
+
+dependencies = [
+    "markdown==3.5.1",
+    "weasyprint==62.3",
+    "pydyf==0.11.0",
+    "pygments==2.17.2",
+    "click==8.1.7",
+]
+
+[project.scripts]
+md2pdf = "md2pdf:main"
+
+[project.urls]
+Homepage = "https://github.com/yourusername/md2pdf"
+Repository = "https://github.com/yourusername/md2pdf"
