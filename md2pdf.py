@@ -149,7 +149,7 @@ def get_default_css():
     """
 
 
-def convert_markdown_to_pdf(input_file, output_file, custom_css=None):
+def convert_markdown_to_pdf(input_file, output_file, custom_css=None, hard_breaks=False):
     """
     Convert a markdown file to PDF.
 
@@ -157,6 +157,7 @@ def convert_markdown_to_pdf(input_file, output_file, custom_css=None):
         input_file: Path to the input markdown file
         output_file: Path to the output PDF file
         custom_css: Optional custom CSS string or file path
+        hard_breaks: Render every newline as a line break (see the note below)
     """
     # Read the markdown file
     try:
@@ -170,13 +171,25 @@ def convert_markdown_to_pdf(input_file, output_file, custom_css=None):
         sys.exit(1)
 
     # Convert markdown to HTML with extensions for better support
-    md = markdown.Markdown(extensions=[
+    extensions = [
         'extra',          # Tables, fenced code blocks, etc.
         'codehilite',     # Syntax highlighting
-        'nl2br',          # Newline to <br>
         'sane_lists',     # Better list handling
         'toc',            # Table of contents
-    ])
+    ]
+
+    if hard_breaks:
+        # Off by default on purpose. nl2br turns EVERY newline into a <br>, which mangles markdown
+        # that is hard-wrapped at a fixed column -- the usual style, and the one this repo's own
+        # markdownlint config enforces via MD013. Paragraphs come out broken at the source's wrap
+        # column instead of flowing to the page width.
+        #
+        # Standard markdown (CommonMark, GitHub) treats a single newline inside a paragraph as a
+        # space. An explicit line break is two trailing spaces or a backslash, and those keep
+        # working without this extension.
+        extensions.append('nl2br')
+
+    md = markdown.Markdown(extensions=extensions)
 
     html_content = md.convert(markdown_content)
 
@@ -223,9 +236,12 @@ def convert_markdown_to_pdf(input_file, output_file, custom_css=None):
               help='Output PDF file path (default: same name as input with .pdf extension)')
 @click.option('-c', '--css', 'custom_css',
               help='Custom CSS file or CSS string to style the PDF')
+@click.option('-b', '--breaks', 'hard_breaks', is_flag=True,
+              help='Render every newline as a line break. Only for markdown written with one '
+                   'line per paragraph: it breaks hard-wrapped text.')
 @click.option('-v', '--verbose', is_flag=True,
               help='Enable verbose output')
-def main(input_file, output_file, custom_css, verbose):
+def main(input_file, output_file, custom_css, hard_breaks, verbose):
     """
     Convert a Markdown file to PDF.
 
@@ -251,9 +267,10 @@ def main(input_file, output_file, custom_css, verbose):
         click.echo(f"Output file: {output_file}")
         if custom_css:
             click.echo(f"Custom CSS: {custom_css}")
+        click.echo(f"Hard line breaks: {hard_breaks}")
 
     # Convert the file
-    convert_markdown_to_pdf(input_file, output_file, custom_css)
+    convert_markdown_to_pdf(input_file, output_file, custom_css, hard_breaks)
 
 
 if __name__ == '__main__':

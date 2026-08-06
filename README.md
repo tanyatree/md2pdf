@@ -76,6 +76,22 @@ Or provide CSS inline:
 md2pdf document.md --css "body { font-size: 14pt; }"
 ```
 
+### Line Breaks
+
+A single newline inside a paragraph is rendered as a space, the way CommonMark and GitHub do it.
+That means markdown hard-wrapped at a fixed column (which `.markdownlint.json` enforces here via
+MD013) flows to the page width instead of keeping the source's wrap points.
+
+To force a line break, use the standard markdown ways: two trailing spaces, or a backslash at the
+end of the line.
+
+If your markdown is written with one long line per paragraph and you *want* every newline to become
+a break, opt in:
+
+```bash
+md2pdf document.md --breaks
+```
+
 ### Verbose Output
 
 ```bash
