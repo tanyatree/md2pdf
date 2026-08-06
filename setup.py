@@ -10,7 +10,7 @@ long_description = (this_directory / "README.md").read_text(encoding='utf-8')
 
 setup(
     name='md2pdf',
-    version='1.0.0',
+    version='1.1.0',
     description='Convert Markdown files to beautiful PDFs with emoji support',
     long_description=long_description,
     long_description_content_type='text/markdown',

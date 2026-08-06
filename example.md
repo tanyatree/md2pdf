@@ -2,6 +2,21 @@
 
 This is a sample document to demonstrate the **amazing** features of our converter! 🎉
 
+## Line Breaks ↩️
+
+This paragraph is hard-wrapped in the source file: every line stops at around 78
+characters, which is how most markdown is written and what a linter with MD013
+enabled will ask you to do. In the PDF it should read as one continuous
+paragraph that flows to the page width, with no breaks at those wrap points. If
+you see it chopped into short lines instead, the `nl2br` extension is on and it
+should not be.
+
+Explicit line breaks still work. This line ends with two spaces,  
+so this one starts on its own line.
+
+If your markdown is written with one long line per paragraph and you *want*
+every newline to become a break, run `md2pdf document.md --breaks`.
+
 ## Why Use This Tool? 🤔
 
 Converting Markdown to PDF has never been easier! Here's what makes this tool special:
